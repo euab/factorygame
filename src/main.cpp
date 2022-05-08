@@ -17,14 +17,15 @@ int main(int argc, const char* argv[])
         Uint32 starting_tick = SDL_GetTicks();
 
         game->HandleEvents();
+        game->Update();
+        game->Render();
 
+        // Check if we are iterating through frames too quickly. If we are,
+        // delay the game loop so it is back in sync.
         if ( ( 1000 / FPS) > SDL_GetTicks() - starting_tick)
         {
             SDL_Delay( ( 1000 / FPS) - ( SDL_GetTicks() - starting_tick));
         }
-
-        game->Update();
-        game->Render();
     }
 
     // It is time for the game to shut down.
