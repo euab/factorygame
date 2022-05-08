@@ -1,4 +1,5 @@
 #include "game.h"
+#include "defs.h"
 
 // Set to nullptr for now for testing purposes.
 Game *game = nullptr;
@@ -9,7 +10,7 @@ int main(int argc, const char* argv[])
 
     // Call to initialise SDL
     game->Init("Factoryscape", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-               800, 600, true);
+               DEFAULT_RESOLUTION_X, DEFAULT_RESOLUTION_Y, true);
 
     // Begin the game loop
     while (game->Running())
