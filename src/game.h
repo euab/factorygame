@@ -24,10 +24,11 @@ class Game
 
         bool Running();
 
+        static SDL_Renderer *renderer;
+
     private:
         bool is_running;
         SDL_Window* window;
-        SDL_Renderer* renderer;
         int ticks;
 };
 

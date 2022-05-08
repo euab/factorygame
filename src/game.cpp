@@ -4,6 +4,8 @@
 
 Entity* test_entity;
 
+SDL_Renderer* Game::renderer = nullptr;
+
 Game::Game() {}
 Game::~Game() {}
 
@@ -42,7 +44,7 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_entity = new Entity("assets/block.png", renderer);
+    test_entity = new Entity("assets/block.png");
 
     ticks = 0;
 }

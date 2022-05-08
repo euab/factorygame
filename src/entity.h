@@ -6,7 +6,7 @@
 class Entity
 {
     public:
-        Entity(const char* texsheet, SDL_Renderer* renderer);
+        Entity(const char* texsheet);
         ~Entity();
 
         void Update();
@@ -18,7 +18,6 @@ class Entity
 
         SDL_Texture* obj_tex;
         SDL_Rect src_rect, dst_rect;
-        SDL_Renderer* m_renderer;
 };
 
 #endif // ENTITY_H

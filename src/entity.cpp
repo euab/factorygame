@@ -1,11 +1,10 @@
 #include "entity.h"
 #include "texture_manager.h"
 
-Entity::Entity(const char* texsheet, SDL_Renderer* renderer)
+Entity::Entity(const char* texsheet)
 {
     // We are making a new game entity
-    m_renderer = renderer;
-    obj_tex = TextureManager::LoadTexture(texsheet, renderer);
+    obj_tex = TextureManager::LoadTexture(texsheet);
 }
 
 void Entity::Update() 
@@ -26,5 +25,5 @@ void Entity::Update()
 
 void Entity::Render()
 {
-    SDL_RenderCopy(m_renderer, obj_tex, &src_rect, &dst_rect);
+    SDL_RenderCopy(Game::renderer, obj_tex, &src_rect, &dst_rect);
 }
