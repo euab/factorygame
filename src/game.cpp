@@ -1,8 +1,12 @@
 #include "game.h"
 #include "texture_manager.h"
 #include "entity.h"
+#include "map.h"
 
 Entity* test_entity;
+Entity* test_entity_2;
+
+Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -44,7 +48,10 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_entity = new Entity("assets/block.png");
+    test_entity = new Entity("assets/block.png", 0, 0);
+    test_entity_2 = new Entity("assets/block.png", 256, 256);
+
+    map = new Map();
 
     ticks = 0;
 }
@@ -70,14 +77,18 @@ void Game::HandleEvents()
 void Game::Update()
 {
     test_entity->Update();
+    test_entity_2->Update();
 }
 
 void Game::Render()
 {
     // Clear the current frame
     SDL_RenderClear(renderer);
+    // Draw the map
+    map->DrawMap();
     // Draw the test texture
     test_entity->Render();
+    test_entity_2->Render();
     // Push the next frame
     SDL_RenderPresent(renderer);
 }

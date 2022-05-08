@@ -6,7 +6,7 @@
 class Entity
 {
     public:
-        Entity(const char* texsheet);
+        Entity(const char* texsheet, int pos_x, int pos_y);
         ~Entity();
 
         void Update();

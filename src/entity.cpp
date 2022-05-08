@@ -1,16 +1,19 @@
 #include "entity.h"
 #include "texture_manager.h"
 
-Entity::Entity(const char* texsheet)
+Entity::Entity(const char* texsheet, int pos_x, int pos_y)
 {
     // We are making a new game entity
     obj_tex = TextureManager::LoadTexture(texsheet);
+
+    x = pos_x;
+    y = pos_y;
 }
 
 void Entity::Update() 
 {
-    x = 0;
-    y = 0;
+    x++;
+    y++;
 
     src_rect.h = 32;
     src_rect.w = 32;
