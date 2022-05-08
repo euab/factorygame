@@ -1,4 +1,5 @@
 #include "game.h"
+#include "texture_manager.h"
 
 SDL_Texture* test_tex;
 SDL_Rect* test_src_rect, test_dest_rect;
@@ -41,11 +42,7 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    // Set up a surface for us to temporarily store a texture before creating
-    // a texture from this surface.
-    SDL_Surface* tmp_surface = IMG_Load("assets/block.png");
-    test_tex = SDL_CreateTextureFromSurface(renderer, tmp_surface);
-    SDL_FreeSurface(tmp_surface);
+    test_tex = TextureManager::LoadTexture("assets/block.png", renderer);
 
     ticks = 0;
 }
