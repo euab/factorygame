@@ -1,2 +1,27 @@
-main:
-	g++ -Wall -pedantic -o game src/main.cpp src/game.cpp src/texture_manager.cpp src/entity.cpp -lSDL2 -lSDL2_image
+CXX ?= g++
+MKDIR := mkdir -p
+CXXFLAGS += `pkg-config --cflags sdl2 SDL2_image`
+CXXFLAGS += -Wall -pedantic
+LDFLAGS := `pkg-config --libs sdl2 SDL2_image`
+OUT := bin/factorygame
+OBJS := $(patsubst src/%.cpp,obj/%.o, $(wildcard src/*.cpp))
+DEPS := $(OBJS:.o=.d)
+
+.PHONY: all clean
+
+all: build
+
+build: $(OUT)
+
+-include $(DEPS)
+
+clean:
+	rm -rf $(OUT) $(OBJS)
+
+$(OUT): $(OBJS)
+	@$(MKDIR) $(dir $@)
+	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) -o $@
+
+obj/%.o: src/%.cpp
+	@$(MKDIR) $(dir $@)
+	$(CXX) $< $(CXXFLAGS) -c -MD -o $@
