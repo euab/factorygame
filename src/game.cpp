@@ -1,8 +1,8 @@
 #include "game.h"
 #include "texture_manager.h"
+#include "entity.h"
 
-SDL_Texture* test_tex;
-SDL_Rect* test_src_rect, test_dest_rect;
+Entity* test_entity;
 
 Game::Game() {}
 Game::~Game() {}
@@ -42,7 +42,7 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_tex = TextureManager::LoadTexture("assets/block.png", renderer);
+    test_entity = new Entity("assets/block.png", renderer);
 
     ticks = 0;
 }
@@ -67,13 +67,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    ticks++;
-    std::cout << "Ticks: " << ticks << std::endl;
-
-    test_dest_rect.w = 32;
-    test_dest_rect.h = 32;
-
-    test_dest_rect.x = ticks;
+    test_entity->Update();
 }
 
 void Game::Render()
@@ -81,7 +75,7 @@ void Game::Render()
     // Clear the current frame
     SDL_RenderClear(renderer);
     // Draw the test texture
-    SDL_RenderCopy(renderer, test_tex, test_src_rect, &test_dest_rect);
+    test_entity->Render();
     // Push the next frame
     SDL_RenderPresent(renderer);
 }
