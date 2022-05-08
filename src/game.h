@@ -3,7 +3,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
+
+#define FPS 60
 
 class Game
 {
@@ -25,6 +28,7 @@ class Game
         bool is_running;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        int ticks;
 };
 
 #endif

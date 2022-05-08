@@ -1,5 +1,8 @@
 #include "game.h"
 
+SDL_Texture* test_tex;
+SDL_Rect* test_src_rect, test_dest_rect;
+
 Game::Game() {}
 Game::~Game() {}
 
@@ -30,13 +33,21 @@ void Game::Init(const char* title, int x, int y, int width, int height,
             // Set the renderer draw colour to white.
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         }
-        
+
         is_running = true;
 
     } else {
         // Set is_running to false so we can break out of the game loop.
         is_running = false;
     }
+
+    // Set up a surface for us to temporarily store a texture before creating
+    // a texture from this surface.
+    SDL_Surface* tmp_surface = IMG_Load("assets/block.png");
+    test_tex = SDL_CreateTextureFromSurface(renderer, tmp_surface);
+    SDL_FreeSurface(tmp_surface);
+
+    ticks = 0;
 }
 
 void Game::HandleEvents()
@@ -57,12 +68,23 @@ void Game::HandleEvents()
     }
 }
 
-void Game::Update() {}
+void Game::Update()
+{
+    ticks++;
+    std::cout << "Ticks: " << ticks << std::endl;
+
+    test_dest_rect.w = 32;
+    test_dest_rect.h = 32;
+
+    test_dest_rect.x = ticks;
+}
 
 void Game::Render()
 {
     // Clear the current frame
     SDL_RenderClear(renderer);
+    // Draw the test texture
+    SDL_RenderCopy(renderer, test_tex, test_src_rect, &test_dest_rect);
     // Push the next frame
     SDL_RenderPresent(renderer);
 }
