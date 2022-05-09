@@ -1,10 +1,10 @@
 #include "game.h"
 #include "texture_manager.h"
-#include "entity.h"
+#include "game_object.h"
 #include "map.h"
 
-Entity* test_entity;
-Entity* test_entity_2;
+GameObject* test_entity;
+GameObject* test_entity_2;
 
 Map* map;
 
@@ -48,8 +48,8 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_entity = new Entity("assets/block.png", 0, 0);
-    test_entity_2 = new Entity("assets/block.png", 256, 256);
+    test_entity = new GameObject("assets/block.png", 0, 0);
+    test_entity_2 = new GameObject("assets/block.png", 256, 256);
 
     map = new Map();
 
