@@ -13,8 +13,6 @@ class Map
 
         void LoadMap(int arr[20][25]);
         void DrawMap();
-        void CaretsanToIsometric();
-        void IsometricToCartesan();
 
     private:
         SDL_Rect src_rect, dst_rect;

@@ -90,7 +90,3 @@ void Map::DrawMap()
         }
     }
 }
-
-void Map::CaretsanToIsometric() { };
-
-void Map::IsometricToCartesan() { };
