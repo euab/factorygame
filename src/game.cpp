@@ -4,6 +4,7 @@
 #include "map.h"
 #include "file.h"
 #include "keyboard.h"
+#include "mouse.h"
 
 GameObject* test_entity;
 GameObject* test_entity_2;
@@ -85,6 +86,11 @@ void Game::HandleEvents()
         case SDL_KEYDOWN:
             if (Keyboard::IsDown(K_W))
                 std::cout << "W key pressed." << std::endl;
+            break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            if (Mouse::IsDown(MOUSE_LEFT))
+                std::cout << "Left click detected" << std::endl;
             break;
 
         default:
