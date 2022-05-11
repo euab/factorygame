@@ -17,7 +17,7 @@ enum Scancode
     K_H = 11,
     K_I = 12,
     K_J = 13,
-    K_J = 14,
+    K_K = 14,
     K_L = 15,
     K_M = 16,
     K_N = 17,
