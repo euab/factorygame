@@ -3,6 +3,7 @@
 #include "game_object.h"
 #include "map.h"
 #include "file.h"
+#include "keyboard.h"
 
 GameObject* test_entity;
 GameObject* test_entity_2;
@@ -79,6 +80,11 @@ void Game::HandleEvents()
         case SDL_QUIT:
             // The user has exited.
             is_running = false;
+            break;
+
+        case SDL_KEYDOWN:
+            if (Keyboard::IsDown(K_W))
+                std::cout << "W key pressed." << std::endl;
             break;
 
         default:
