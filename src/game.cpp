@@ -51,8 +51,8 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_entity = new GameObject("assets/block.png", 0, 0);
-    test_entity_2 = new GameObject("assets/block.png", 256, 256);
+    test_entity = new GameObject("block.png", 0, 0);
+    test_entity_2 = new GameObject("block.png", 256, 256);
 
     map = new Map();
 

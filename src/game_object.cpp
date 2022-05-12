@@ -1,10 +1,10 @@
 #include "game_object.h"
-#include "texture_manager.h"
+#include "assets.h"
 
 GameObject::GameObject(const char* texsheet, int pos_x, int pos_y)
 {
     // We are making a new game entity
-    obj_tex = TextureManager::LoadTexture(texsheet);
+    obj_tex = Assets::GetTexture(texsheet);
 
     x = pos_x;
     y = pos_y;

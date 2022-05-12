@@ -1,5 +1,6 @@
 #include "map.h"
 #include "texture_manager.h"
+#include "assets.h"
 
 // Debug
 int test_map[20][25] = { 
@@ -29,9 +30,9 @@ int test_map[20][25] = {
 Map::Map()
 {
     // Load in terrain textures
-    tex_dirt = TextureManager::LoadTexture("assets/dirt.png");
-    tex_grass = TextureManager::LoadTexture("assets/grass.png");
-    tex_water = TextureManager::LoadTexture("assets/water.png");
+    tex_dirt = Assets::GetTexture("dirt.png");
+    tex_grass = Assets::GetTexture("grass.png");
+    tex_water = Assets::GetTexture("water.png");
 
     LoadMap(test_map);
 
