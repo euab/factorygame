@@ -56,17 +56,6 @@ void Game::Init(const char* title, int x, int y, int width, int height,
 
     map = new Map();
 
-    File file("test.txt");
-    std::vector<char> buffer;
-    SDL_RWops* data;
-
-    if (file.Read(buffer) && !buffer.empty())
-        data = SDL_RWFromMem(&buffer[0], buffer.size());
-    
-    char text[256];
-    data->read(data, text, sizeof(text), 1) > 0;
-    std::cout << "Data: " << text << std::endl;
-
     ticks = 0;
 }
 

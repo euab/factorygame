@@ -43,7 +43,7 @@ enum Scancode
     K_7 = 36,
     K_8 = 37,
     K_9 = 38,
-    K_0 = 39,
+    K_0 = 39
 };
 
 class Keyboard
