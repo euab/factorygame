@@ -14,8 +14,8 @@ GameObject::GameObject(const char* texsheet, int pos_x, int pos_y)
 
 void GameObject::Update() 
 {
-    src_rect.h = 32;
-    src_rect.w = 32;
+    src_rect.h = 8;
+    src_rect.w = 8;
     src_rect.x = 0;
     src_rect.y = 0;
 
