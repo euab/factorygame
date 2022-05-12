@@ -9,13 +9,13 @@ void Player::MovePlayer(const int dx, const int dy)
 void Player::OnUpdate()
 {
     if (Keyboard::IsDown(K_W))
-        Move(0, -2);
+        Move(0, -1);
     if (Keyboard::IsDown(K_A))
-        Move(-2, 0);
+        Move(-1, 0);
     if (Keyboard::IsDown(K_S))
-        Move(0, 2);
+        Move(0, 1);
     if (Keyboard::IsDown(K_D))
-        Move(2, 0);
+        Move(1, 0);
     
     Update();
 }
