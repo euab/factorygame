@@ -5,9 +5,9 @@
 #include "file.h"
 #include "keyboard.h"
 #include "mouse.h"
+#include "player.h"
 
-GameObject* test_entity;
-GameObject* test_entity_2;
+Player* test_player;
 
 Map* map;
 
@@ -51,8 +51,7 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         is_running = false;
     }
 
-    test_entity = new GameObject("block.png", 0, 0);
-    test_entity_2 = new GameObject("block.png", 256, 256);
+    test_player = new Player("block.png", 0, 0);
 
     map = new Map();
 
@@ -89,8 +88,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    test_entity->Update();
-    test_entity_2->Update();
+    test_player->OnUpdate();
 }
 
 void Game::Render()
@@ -100,8 +98,7 @@ void Game::Render()
     // Draw the map
     map->DrawMap();
     // Draw the test texture
-    test_entity->Render();
-    test_entity_2->Render();
+    test_player->OnRender();
     // Push the next frame
     SDL_RenderPresent(renderer);
 }

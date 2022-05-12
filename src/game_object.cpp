@@ -1,6 +1,8 @@
 #include "game_object.h"
 #include "assets.h"
 
+GameObject::GameObject() { }
+
 GameObject::GameObject(const char* texsheet, int pos_x, int pos_y)
 {
     // We are making a new game entity
@@ -12,9 +14,6 @@ GameObject::GameObject(const char* texsheet, int pos_x, int pos_y)
 
 void GameObject::Update() 
 {
-    x++;
-    y++;
-
     src_rect.h = 32;
     src_rect.w = 32;
     src_rect.x = 0;
@@ -30,3 +29,13 @@ void GameObject::Render()
 {
     SDL_RenderCopy(Game::renderer, obj_tex, &src_rect, &dst_rect);
 }
+
+void GameObject::Move(int dx, int dy)
+{
+    x += dx;
+    y += dy;
+}
+
+void GameObject::OnRender() { }
+
+void GameObject::OnUpdate() { }

@@ -6,11 +6,17 @@
 class GameObject
 {
     public:
+        GameObject();
         GameObject(const char* texsheet, int pos_x, int pos_y);
         ~GameObject();
 
         void Update();
         void Render();
+
+        void Move(int dx, int dy);
+
+        virtual void OnUpdate();
+        virtual void OnRender();
 
     private:
         int x;
