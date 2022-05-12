@@ -4,6 +4,10 @@
 #define MAP_H
 
 #include "game.h"
+#include "defs.h"
+
+#define MAP_SIZE_X DEFAULT_RESOLUTION_X / 32
+#define MAP_SIZE_Y DEFAULT_RESOLUTION_Y / 32
 
 class Map
 {
@@ -11,8 +15,9 @@ class Map
         Map();
         ~Map();
 
-        void LoadMap(int arr[20][32]);
+        void LoadMap(int arr[MAP_SIZE_Y][MAP_SIZE_X]);
         void DrawMap();
+        void GenerateMap();
 
     private:
         SDL_Rect src_rect, dst_rect;

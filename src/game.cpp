@@ -41,7 +41,7 @@ void Game::Init(const char* title, int x, int y, int width, int height,
         {
             std::cout << "We made a renderer" << std::endl;
             // Set the renderer draw colour to white.
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         }
 
         is_running = true;

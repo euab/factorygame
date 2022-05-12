@@ -1,5 +1,6 @@
 #include "texture_manager.h"
 
+// Deprecated.
 SDL_Texture* TextureManager::LoadTexture(const char* texture)
 {
     SDL_Surface* tmp_surf = IMG_Load(texture);
