@@ -18,6 +18,8 @@ SDL_Texture* Assets::GetTexture(std::string file_path)
     else
         std::cerr << "ERROR: Failed to read texture from " << file_path 
             << std::endl;
+    
+    return texture;
 }
 
 SDL_Texture* Assets::ReadTexture(const std::string &file_path)
