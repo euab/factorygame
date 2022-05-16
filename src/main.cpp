@@ -9,7 +9,7 @@ int main(int argc, const char* argv[])
     game = new Game();
 
     // Call to initialise SDL
-    game->Init("Factoryscape", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+    game->Init("Factorygame", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                DEFAULT_RESOLUTION_X, DEFAULT_RESOLUTION_Y, true);
 
     // Begin the game loop
