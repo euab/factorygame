@@ -26,7 +26,7 @@ class Map
         SDL_Texture* tex_water;
 
         // For baseline purposes the array will be stored in a 2D array.
-        int map[20][25];
+        int map[MAP_SIZE_Y][MAP_SIZE_X];
 };
 
 #endif // MAP_H
