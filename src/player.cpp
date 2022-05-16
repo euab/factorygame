@@ -1,21 +1,17 @@
 #include "player.h"
 #include "keyboard.h"
-
-void Player::MovePlayer(const int dx, const int dy)
-{
-    Move(dx, dy);
-}
+#include "vec2.h"
 
 void Player::OnUpdate()
 {
     if (Keyboard::IsDown(K_W))
-        Move(0, -1);
+        Move(Vector2::V_UP);
     if (Keyboard::IsDown(K_A))
-        Move(-1, 0);
+        Move(Vector2::V_LEFT);
     if (Keyboard::IsDown(K_S))
-        Move(0, 1);
+        Move(Vector2::V_DOWN);
     if (Keyboard::IsDown(K_D))
-        Move(1, 0);
+        Move(Vector2::V_RIGHT);
     
     Update();
 }

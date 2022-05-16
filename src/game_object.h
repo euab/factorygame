@@ -2,6 +2,7 @@
 #define GAME_OBJECT_H
 
 #include "game.h"
+#include "vec2.h"
 
 class GameObject
 {
@@ -13,14 +14,13 @@ class GameObject
         void Update();
         void Render();
 
-        void Move(int dx, int dy);
+        void Move(const Vector2 &delta);
 
         virtual void OnUpdate();
         virtual void OnRender();
 
     private:
-        int x;
-        int y;
+        Vector2 pos;
 
         SDL_Texture* obj_tex;
         SDL_Rect src_rect, dst_rect;
