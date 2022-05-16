@@ -112,6 +112,8 @@ void Game::Clean()
 
     // Print notification 
     std::cout << "Process cleaned" << std::endl;
+
+    SDL_Quit();
 }
 
 bool Game::Running()
