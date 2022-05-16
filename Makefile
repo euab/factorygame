@@ -1,4 +1,4 @@
-CXX ?= g++ -std=c++11
+CXX ?= g++ -std=c++14
 MKDIR := mkdir -p
 CXXFLAGS += `pkg-config --cflags sdl2 SDL2_image`
 CXXFLAGS += -Wall -pedantic
