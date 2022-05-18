@@ -51,37 +51,37 @@ Perlin::Perlin(unsigned int seed)
 
 double Perlin::Noise(double x, double y, double z)
 {
-	// Find the unit cube that contains the point
-	int X = (int) floor(x) & 255;
-	int Y = (int) floor(y) & 255;
-	int Z = (int) floor(z) & 255;
+    // Find the unit cube that contains the point
+    int X = (int) floor(x) & 255;
+    int Y = (int) floor(y) & 255;
+    int Z = (int) floor(z) & 255;
 
-	// Find relative (x, y, z) of point in cube
-	x -= floor(x);
-	y -= floor(y);
-	z -= floor(z);
+    // Find relative (x, y, z) of point in cube
+    x -= floor(x);
+    y -= floor(y);
+    z -= floor(z);
 
-	// Compute fade curves for each of (x, y, z)
-	double u = Fade(x);
-	double v = Fade(y);
-	double w = Fade(z);
+    // Compute fade curves for each of (x, y, z)
+    double u = Fade(x);
+    double v = Fade(y);
+    double w = Fade(z);
 
-	// Hash coordinates of the 8 cube corners
-	int A = p[X] + Y;
-	int AA = p[A] + Z;
-	int AB = p[A + 1] + Z;
-	int B = p[X + 1] + Y;
-	int BA = p[B] + Z;
-	int BB = p[B + 1] + Z;
+    // Hash coordinates of the 8 cube corners
+    int A = p[X] + Y;
+    int AA = p[A] + Z;
+    int AB = p[A + 1] + Z;
+    int B = p[X + 1] + Y;
+    int BA = p[B] + Z;
+    int BB = p[B + 1] + Z;
 
-	// Add blended results from 8 corners of cube
-	double res = 
+    // Add blended results from 8 corners of cube
+    double res = 
         Lerp(w, Lerp(v, Lerp(u, Grad(p[AA], x, y, z),
         Grad(p[BA], x-1, y, z)), Lerp(u, Grad(p[AB], x, y-1, z),
-        Grad(p[BB], x-1, y-1, z))),	Lerp(v, Lerp(u, Grad(p[AA+1], x, y, z-1),
+        Grad(p[BB], x-1, y-1, z))), Lerp(v, Lerp(u, Grad(p[AA+1], x, y, z-1),
         Grad(p[BA+1], x-1, y, z-1)), Lerp(u, Grad(p[AB+1], x, y-1, z-1),
         Grad(p[BB+1], x-1, y-1, z-1))));
-	return (res + 1.0) / 2.0;
+    return (res + 1.0) / 2.0;
 }
 
 double Perlin::Fade(double t)
