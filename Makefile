@@ -1,10 +1,14 @@
 CXX ?= g++ -std=c++14
 MKDIR := mkdir -p
+
+INCLUDE := ./src
+
 CXXFLAGS += `pkg-config --cflags sdl2 SDL2_image`
-CXXFLAGS += -Wall -pedantic
+CXXFLAGS += -Wall -pedantic -std=c++14 -I $(INCLUDE)
 LDFLAGS := `pkg-config --libs sdl2 SDL2_image`
 OUT := bin/factorygame
-OBJS := $(patsubst src/%.cpp,obj/%.o, $(wildcard src/*.cpp))
+SRCS := $(wildcard src/*.cpp)
+OBJS := $(patsubst src/%.cpp,obj/%.o, $(SRCS))
 DEPS := $(OBJS:.o=.d)
 
 .PHONY: all clean
@@ -16,7 +20,7 @@ build: $(OUT)
 -include $(DEPS)
 
 clean:
-	rm -rf $(OUT) $(OBJS)
+	$(RM) -rf $(OUT) $(OBJS)
 
 $(OUT): $(OBJS)
 	@$(MKDIR) $(dir $@)
