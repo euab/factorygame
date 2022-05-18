@@ -40,15 +40,15 @@ void Map::DrawMap()
 
             switch (terrain_type)
             {
-                case 0:
+                case TERRAIN_TYPE_WATER:
                     TextureManager::Draw(tex_water, src_rect, dst_rect);
                     break;
                 
-                case 1:
+                case TERRAIN_TYPE_DIRT:
                     TextureManager::Draw(tex_dirt, src_rect, dst_rect);
                     break;
                 
-                case 2:
+                case TERRAIN_TYPE_GRASS:
                     TextureManager::Draw(tex_grass, src_rect, dst_rect);
                 
                 default:
@@ -68,7 +68,7 @@ void Map::GenerateMap()
     Generate(m_map, seed);
 }
 
-void Map::Generate(std::vector<std::vector<int> > &genmap)
+void Map::Generate(std::vector<std::vector<TerrainType> > &genmap)
 {
     // No seed has been specified, generate a map using the default seed.
     const unsigned int seed = 42;
@@ -76,11 +76,11 @@ void Map::Generate(std::vector<std::vector<int> > &genmap)
     Generate(genmap, seed);
 }
 
-void Map::Generate(std::vector<std::vector<int> > &genmap,
+void Map::Generate(std::vector<std::vector<TerrainType> > &genmap,
                    const unsigned int &seed)
 {
     // Resize the map vector to avoid our beloved, the segfault.
-    genmap.resize(MAP_SIZE_Y, std::vector<int>(MAP_SIZE_X));
+    genmap.resize(MAP_SIZE_Y, std::vector<TerrainType>(MAP_SIZE_X));
 
     Perlin pn(seed);
 
@@ -95,13 +95,13 @@ void Map::Generate(std::vector<std::vector<int> > &genmap,
             std::cout << n << ", ";
 
             if (n < 0.35f)
-                genmap[i][j] = 0;
+                genmap[i][j] = TERRAIN_TYPE_WATER;
 
             else if (n >= 0.35f && n < 0.6f)
-                genmap[i][j] = 2;
+                genmap[i][j] = TERRAIN_TYPE_GRASS;
 
             else
-                genmap[i][j] = 1;
+                genmap[i][j] = TERRAIN_TYPE_DIRT;
         }
     }
 

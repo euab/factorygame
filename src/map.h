@@ -10,6 +10,13 @@
 #define MAP_SIZE_X DEFAULT_RESOLUTION_X / 32
 #define MAP_SIZE_Y DEFAULT_RESOLUTION_Y / 32
 
+enum TerrainType
+{
+    TERRAIN_TYPE_WATER,
+    TERRAIN_TYPE_DIRT,
+    TERRAIN_TYPE_GRASS,
+};
+
 class Map
 {
     public:
@@ -20,8 +27,8 @@ class Map
         void DrawMap();
         void GenerateMap();
 
-        void Generate(std::vector<std::vector<int> > &genmap);
-        void Generate(std::vector<std::vector<int> > &genmap,
+        void Generate(std::vector<std::vector<TerrainType> > &genmap);
+        void Generate(std::vector<std::vector<TerrainType> > &genmap,
                       const unsigned int &seed);
 
     private:
@@ -31,7 +38,7 @@ class Map
         SDL_Texture* tex_water;
 
         // For baseline purposes the array will be stored in a 2D array.
-        std::vector<std::vector<int> > m_map;
+        std::vector<std::vector<TerrainType> > m_map;
 };
 
 #endif // MAP_H
