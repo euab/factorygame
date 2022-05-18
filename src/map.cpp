@@ -1,9 +1,8 @@
 #include "map.h"
 #include "texture_manager.h"
 #include "assets.h"
-
-// Debug
-int test_map[MAP_SIZE_Y][MAP_SIZE_X];
+#include "perlin.h"
+#include <iostream>
 
 Map::Map()
 {
@@ -13,7 +12,6 @@ Map::Map()
     tex_water = Assets::GetTexture("water.png");
 
     GenerateMap();
-    LoadMap(test_map);
 
     src_rect.x = src_rect.y = 0;
     src_rect.w = dst_rect.w = 32;
@@ -28,17 +26,6 @@ Map::~Map()
     SDL_DestroyTexture(tex_dirt);
 }
 
-void Map::LoadMap(int arr[MAP_SIZE_Y][MAP_SIZE_X])
-{
-    for (int row = 0; row < MAP_SIZE_Y; row++)
-    {
-        for (int col = 0; col < MAP_SIZE_X; col++)
-        {
-            map[row][col] = arr[row][col];
-        }
-    }
-}
-
 void Map::DrawMap()
 {
     int terrain_type = 0;
@@ -46,7 +33,7 @@ void Map::DrawMap()
     {
         for (int col = 0; col < MAP_SIZE_X; col++)
         {
-            terrain_type = map[row][col];
+            terrain_type = m_map[row][col];
 
             dst_rect.x = col * 32;
             dst_rect.y = row * 32;
@@ -73,11 +60,50 @@ void Map::DrawMap()
 
 void Map::GenerateMap()
 {
-    int terrain_type;
-    for (int row=0; row<MAP_SIZE_Y; row++) {
-        for (int col=0; col<MAP_SIZE_X; col++) {
-            terrain_type = std::rand() % 3;
-            test_map[row][col] = terrain_type;
+    unsigned int seed;
+    std::cout << "Enter a seed: ";
+    std::cin >> seed;
+    std::cout << std::endl;
+
+    Generate(m_map, seed);
+}
+
+void Map::Generate(std::vector<std::vector<int> > &genmap)
+{
+    // No seed has been specified, generate a map using the default seed.
+    const unsigned int seed = 42;
+
+    Generate(genmap, seed);
+}
+
+void Map::Generate(std::vector<std::vector<int> > &genmap,
+                   const unsigned int &seed)
+{
+    // Resize the map vector to avoid our beloved, the segfault.
+    genmap.resize(MAP_SIZE_Y, std::vector<int>(MAP_SIZE_X));
+
+    Perlin pn(seed);
+
+    // Iterate through the empty map vector, inserting perlin values.
+    for (int i = 0; i < MAP_SIZE_Y; i++) {
+        for (int j = 0; j < MAP_SIZE_X; j++) {
+            double x = (double) j / ((double) MAP_SIZE_X);
+            double y = (double) i / ((double) MAP_SIZE_Y);
+
+            double n = pn.Noise(x * 10.0f, y * 10.0f, 0.8f);
+
+            std::cout << n << ", ";
+
+            if (n < 0.35f)
+                genmap[i][j] = 0;
+
+            else if (n >= 0.35f && n < 0.6f)
+                genmap[i][j] = 2;
+
+            else
+                genmap[i][j] = 1;
         }
     }
+
+    std::cout << std::endl;
 }
