@@ -19,40 +19,40 @@ Game::~Game() {}
 void Game::Init(const char* title, int x, int y, int width, int height,
                 bool fullscreen)
 {
-    int flags = 0;
+    is_running = false;
+
+    unsigned int flags = SDL_WINDOW_OPENGL;
 
     // If the we have chosen to launch into fullscreen set flags to
     // enable fullscreen.
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
 
-    // Initialse all SDL subsystems and branch if successful.
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-    {
-        std::cout << "SDL subsystems initialised." << std::endl;
-        // Create the SDL window, log if we did it successfully.
-        window = SDL_CreateWindow(title, x, y, width, height, flags);
-        if (window)
-            std::cout << "We made a window" << std::endl;
-        
-        // Create a renderer using the first availible driver.
-        renderer = SDL_CreateRenderer(window, -1, 0);
-        if (renderer)
-        {
-            std::cout << "We made a renderer" << std::endl;
-            // Set the renderer draw colour to white.
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-        }
-
-        is_running = true;
-
-    } else {
-        // Set is_running to false so we can break out of the game loop.
-        is_running = false;
+    if (!SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+        // If we get here we are screwed. Just say that nothing worked and exit.
+        std::cerr << "Failed to create SDLWindow" << std::endl;
+        return;
     }
 
-    test_player = new Player("block.png", 0, 0);
+    std::cout << "SDL subsystems initialised." << std::endl;
+    // Create the SDL window. Exit if this fails.
+    window = SDL_CreateWindow(title, x, y, width, height, flags);
+    if (!window)
+        std::cerr << "Failed to create a window" << std::endl;
+        return;
+    
+    // Create a renderer using the first availible driver.
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    if (!renderer) {
+        std::cerr << "Failed to create renderer" << std::endl;
+        return;
+    }
 
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+
+    is_running = true;
+
+    test_player = new Player("block.png", 0, 0);
     map = new Map();
 
     ticks = 0;
