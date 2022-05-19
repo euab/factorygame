@@ -19,16 +19,14 @@ Game::~Game() {}
 void Game::Init(const char* title, int x, int y, int width, int height,
                 bool fullscreen)
 {
-    is_running = false;
-
-    unsigned int flags = SDL_WINDOW_OPENGL;
+    unsigned int flags = 0;
 
     // If the we have chosen to launch into fullscreen set flags to
     // enable fullscreen.
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
 
-    if (!SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         // If we get here we are screwed. Just say that nothing worked and exit.
         std::cerr << "Failed to create SDLWindow" << std::endl;
         return;
@@ -37,9 +35,10 @@ void Game::Init(const char* title, int x, int y, int width, int height,
     std::cout << "SDL subsystems initialised." << std::endl;
     // Create the SDL window. Exit if this fails.
     window = SDL_CreateWindow(title, x, y, width, height, flags);
-    if (!window)
+    if (!window) {
         std::cerr << "Failed to create a window" << std::endl;
         return;
+    }
     
     // Create a renderer using the first availible driver.
     renderer = SDL_CreateRenderer(window, -1, 0);
