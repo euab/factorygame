@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 
-#include "scenegraphnode.h"
-#include "scene.h"
+#include "scene/scenegraphnode.h"
+#include "scene/scene.h"
 
 class SceneManager
 {

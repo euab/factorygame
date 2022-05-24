@@ -1,7 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "scenegraphnode.h"
+#include "scene/scenegraphnode.h"
 
 class Scene
 {

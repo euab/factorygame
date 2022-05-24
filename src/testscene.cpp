@@ -1,6 +1,6 @@
 #include "testscene.h"
-#include "scenegraphnode.h"
-#include "scenegraph.h"
+#include "scene/scenegraphnode.h"
+#include "scene/scenegraph.h"
 #include "testnode.h"
 
 #include <string>

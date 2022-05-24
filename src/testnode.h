@@ -1,7 +1,7 @@
 #ifndef TESTNODE_H
 #define TESTNODE_H
 
-#include "scenegraphnode.h"
+#include "scene/scenegraphnode.h"
 
 class TestNode : public Node
 {

@@ -2,11 +2,11 @@
 #include "texture_manager.h"
 #include "game_object.h"
 #include "map.h"
-#include "file.h"
-#include "keyboard.h"
-#include "mouse.h"
+#include "io/file.h"
+#include "io/keyboard.h"
+#include "io/mouse.h"
 #include "player.h"
-#include "scenemanager.h"
+#include "scene/scenemanager.h"
 #include "testscene.h"
 
 Player* test_player;

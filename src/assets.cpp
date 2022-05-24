@@ -1,5 +1,5 @@
 #include "assets.h"
-#include "file.h"
+#include "io/file.h"
 
 const char* Assets::SPRITES_PATH = "assets/";
 

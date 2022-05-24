@@ -1,7 +1,7 @@
 #include "map.h"
 #include "texture_manager.h"
 #include "assets.h"
-#include "perlin.h"
+#include "generation/perlin.h"
 #include <iostream>
 
 Map::Map()

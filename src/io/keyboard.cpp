@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include "io/keyboard.h"
 
 const Uint8 *(Keyboard::keyboardState) = SDL_GetKeyboardState(nullptr);
 

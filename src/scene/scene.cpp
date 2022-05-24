@@ -1,5 +1,5 @@
-#include "scene.h"
-#include "scenegraphnode.h"
+#include "scene/scene.h"
+#include "scene/scenegraphnode.h"
 
 Scene::Scene() : m_root(nullptr) { }
 

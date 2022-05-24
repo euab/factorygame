@@ -1,7 +1,7 @@
-#include "scenegraphnode.h"
-#include "scene.h"
-#include "scenegraph.h"
-#include "scenemanager.h"
+#include "scene/scenegraphnode.h"
+#include "scene/scene.h"
+#include "scene/scenegraph.h"
+#include "scene/scenemanager.h"
 
 #include <iostream>
 

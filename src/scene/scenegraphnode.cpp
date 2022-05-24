@@ -1,5 +1,5 @@
 #include "game.h"
-#include "scenegraphnode.h"
+#include "scene/scenegraphnode.h"
 
 #include <sstream>
 #include <string>

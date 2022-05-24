@@ -1,7 +1,7 @@
 #ifndef TESTSCENE_H
 #define TESTSCENE_H
 
-#include "scene.h"
+#include "scene/scene.h"
 
 class TestScene : public Scene
 {
