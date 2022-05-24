@@ -6,6 +6,8 @@
 #include "keyboard.h"
 #include "mouse.h"
 #include "player.h"
+#include "scenemanager.h"
+#include "testscene.h"
 
 Player* test_player;
 
@@ -16,6 +18,7 @@ SDL_Renderer* Game::renderer = nullptr;
 Game::Game() {}
 Game::~Game() {}
 
+// TODO: Expose engine as singleton
 void Game::Init(const char* title, int x, int y, int width, int height,
                 bool fullscreen)
 {
@@ -53,6 +56,16 @@ void Game::Init(const char* title, int x, int y, int width, int height,
 
     test_player = new Player("block.png", 0, 0);
     map = new Map();
+
+    // Debug
+    // The test scene will be destroyed immediately as we go out of scope.
+    // We are just checking that everything works.
+    SceneManager sm = SceneManager();
+    TestScene testScene = TestScene();
+    auto p_testScene = std::make_shared<TestScene>(testScene);
+    sm.addScene("ts", p_testScene);
+
+    sm.swapScene("ts");
 
     ticks = 0;
 }
