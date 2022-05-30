@@ -28,12 +28,7 @@ Engine::Engine(const char* title, int x, int y, int w, int h, bool fullscreen,
 
 Engine::~Engine() { }
 
-void Engine::init()
-{
-    m_initialiser->initSDL();
-    m_initialiser->initWindow(m_windowTitle, m_windowX, m_windowY, m_windowW,
-        m_windowH, m_windowFullscreen, m_windowResizable);
-}
+void Engine::init() { }
 
 SceneManager &Engine::scenes()
 {
