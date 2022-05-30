@@ -1,8 +1,8 @@
 # vscode and visual studio
-.vscode
-.vcxproj
-.filters
-.user
+*.vscode
+*.vcxproj
+*.filters
+*.user
 /x64
 
 # makefile
@@ -10,4 +10,4 @@
 /obj
 
 # macos stuff
-.DS_Store
+*.DS_Store
