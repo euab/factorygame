@@ -6,7 +6,7 @@
 #include "engine/defs.h"
 
 // Entry point for factorygame.
-int main(int argc, const char* argv[])
+int main(int argc, char* argv[])
 {
     std::cout << "Hello there :)" << std::endl;
     int code = 0;
