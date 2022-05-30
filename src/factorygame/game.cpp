@@ -42,13 +42,10 @@ Engine* Game::getEngineInstance()
 
 int Game::run()
 {
-    auto testScene = std::make_shared<TestScene>();
-
-    // ISSUE: Map will never be rendered despite the fact everything initialises
-    // correctly. This happens because map has been moved from the engine to
-    // the game. To solve this we need to add the ability to queue and dequeue
-    // tasks to the game loop.
+    // auto testScene = std::make_shared<TestScene>();
     Map map = Map(m_engine);
+
+    m_engine.loop().queueRendererHandle([&] { map.DrawMap(); });
 
     int code = getEngineInstance()->loop().run();
 

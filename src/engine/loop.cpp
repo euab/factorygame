@@ -57,10 +57,21 @@ void GameLoop::update() { }
 void GameLoop::draw()
 {
     SDL_RenderClear(m_engine.renderer());
+
+    // Call to each registered renderer handler
+    for (auto& handler : m_qRendering)
+        handler();
+
     SDL_RenderPresent(m_engine.renderer());
 }
 
 bool GameLoop::isRunning()
 {
     return m_running;
+}
+
+// Push a render handler onto the back of the render queue.
+void GameLoop::queueRendererHandle(RendererHandler handler)
+{
+    m_qRendering.push_back(std::move(handler));
 }

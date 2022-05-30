@@ -18,8 +18,6 @@ Map::Map(Engine &engine) : m_engine(engine)
     src_rect.w = dst_rect.w = 32;
     src_rect.h = dst_rect.h = 32;
     dst_rect.x = dst_rect.y = 0;
-
-    DrawMap();
 }
 
 Map::~Map()

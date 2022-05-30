@@ -1,12 +1,16 @@
 #ifndef ENGINE_LOOP_H
 #define ENGINE_LOOP_H
 
+#include <functional>
+
 #include "engine/engine.h"
 
 class Engine;
 
 class GameLoop
 {
+    using RendererHandler = std::function<void(void)>;
+
 public:
     GameLoop(int fps, Engine &engine);
     ~GameLoop();
@@ -20,10 +24,15 @@ public:
 
     bool isRunning();
 
+    void queueRendererHandle(RendererHandler handler);
+    void dequeueHandlerHandle(RendererHandler handler);
+
 private:
     bool m_running;
     int m_fps;
     Engine &m_engine;
+
+    std::list<RendererHandler> m_qRendering;
 };
 
 #endif // ENGINE_LOOP_H
