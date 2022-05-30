@@ -1,5 +1,13 @@
-game
+# vscode and visual studio
 .vscode
+.vcxproj
+.filters
+.user
+/x64
+
+# makefile
 /bin
 /obj
+
+# macos stuff
 .DS_Store
