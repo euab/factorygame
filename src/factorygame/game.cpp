@@ -3,8 +3,12 @@
 #include "engine/engine.h"
 #include "factorygame/testscene.h"
 #include "factorygame/map.h"
+#include "factorygame/player.h"
 
 #include <iostream>
+
+Player* player;
+Map* map;
 
 Game::Game(const char *title, int x, int y, int width, int height,
            bool fullscreen, bool resizable) : 
@@ -43,9 +47,11 @@ Engine* Game::getEngineInstance()
 int Game::run()
 {
     // auto testScene = std::make_shared<TestScene>();
-    Map map = Map(m_engine);
+    Map* map = new Map(m_engine);
+    Player* player = new Player(m_engine, "block.png", 0, 0);
 
-    m_engine.loop().queueRendererHandle([&] { map.DrawMap(); });
+    m_engine.loop().queueRendererHandle([&] { map->DrawMap(); });
+    m_engine.loop().queueRendererHandle([&] { player->Render();  });
 
     int code = getEngineInstance()->loop().run();
 
