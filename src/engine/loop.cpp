@@ -52,7 +52,11 @@ void GameLoop::handleEvents()
     }
 }
 
-void GameLoop::update() { }
+void GameLoop::update()
+{
+    for (auto& uHandler : m_qUpdating)
+        uHandler();
+}
 
 void GameLoop::draw()
 {
@@ -74,4 +78,10 @@ bool GameLoop::isRunning()
 void GameLoop::queueRendererHandle(RendererHandler handler)
 {
     m_qRendering.push_back(std::move(handler));
+}
+
+// Push an update handler onto the back of the update queue.
+void GameLoop::enqueueUpdateHandle(UpdateHandler handler)
+{
+    m_qUpdating.push_back(std::move(handler));
 }

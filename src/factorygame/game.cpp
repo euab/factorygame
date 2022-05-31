@@ -28,7 +28,7 @@ int Game::init()
 {
     m_engine.init();
     int code = run();
-    return code;    
+    return code;
 }
 
 // NOTE: I intend to implement the engine as a singleton but
@@ -51,7 +51,9 @@ int Game::run()
     Player* player = new Player(m_engine, "block.png", 0, 0);
 
     m_engine.loop().queueRendererHandle([&] { map->DrawMap(); });
+
     m_engine.loop().queueRendererHandle([&] { player->Render();  });
+    m_engine.loop().enqueueUpdateHandle([&] { player->Update(); });
 
     int code = getEngineInstance()->loop().run();
 
