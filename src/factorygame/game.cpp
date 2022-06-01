@@ -53,7 +53,7 @@ int Game::run()
     m_engine.loop().queueRendererHandle([&] { map->DrawMap(); });
 
     m_engine.loop().queueRendererHandle([&] { player->Render();  });
-    m_engine.loop().enqueueUpdateHandle([&] { player->Update(); });
+    m_engine.loop().enqueueUpdateHandle([&] { player->OnUpdate(); });
 
     int code = getEngineInstance()->loop().run();
 
