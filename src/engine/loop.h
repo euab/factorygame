@@ -2,6 +2,7 @@
 #define ENGINE_LOOP_H
 
 #include <functional>
+#include <list>
 
 #include "engine/engine.h"
 
