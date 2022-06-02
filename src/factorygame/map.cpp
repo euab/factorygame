@@ -12,12 +12,17 @@ Map::Map(Engine &engine) : m_engine(engine)
     tex_grass = m_engine.assets().GetTexture("grass.png");
     tex_water = m_engine.assets().GetTexture("water.png");
 
+    tex_test_ore = m_engine.assets().GetTexture("ore.png");
+
     GenerateMap();
 
     src_rect.x = src_rect.y = 0;
     src_rect.w = dst_rect.w = 32;
     src_rect.h = dst_rect.h = 32;
     dst_rect.x = dst_rect.y = 0;
+
+    srcRectOre.w = dstRectOre.w = 32;
+    srcRectOre.h = dstRectOre.h = 32;
 }
 
 Map::~Map()
@@ -30,6 +35,8 @@ Map::~Map()
 void Map::DrawMap()
 {
     int terrain_type = 0;
+    int oreT = 0;
+
     for (int row = 0; row < MAP_SIZE_Y; row++)
     {
         for (int col = 0; col < MAP_SIZE_X; col++)
@@ -57,6 +64,25 @@ void Map::DrawMap()
             }
         }
     }
+
+    for (int row = 0; row < MAP_SIZE_Y; row++) {
+        for (int col = 0; col < MAP_SIZE_X; col++) {
+            oreT = m_mapOre[row][col];
+
+            dstRectOre.x = col * 32;
+            dstRectOre.y = row * 32;
+
+            switch(oreT)
+            {
+                case ORE_TYPE_IRON:
+                    TextureManager::Draw(m_engine.renderer(), tex_test_ore, srcRectOre, dstRectOre);
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 void Map::GenerateMap()
@@ -67,6 +93,7 @@ void Map::GenerateMap()
     std::cout << std::endl;
 
     Generate(m_map, seed);
+    generateOre(m_mapOre, seed);
 }
 
 void Map::Generate(std::vector<std::vector<TerrainType> > &genmap)
@@ -101,6 +128,40 @@ void Map::Generate(std::vector<std::vector<TerrainType> > &genmap,
 
             else
                 genmap[i][j] = TERRAIN_TYPE_DIRT;
+        }
+    }
+}
+
+// make perlin map for ore
+// load tile map
+// check if tile is not water if so apply ore if perlin greater than 0.9.
+void Map::generateOre(std::vector<std::vector<OreType>> &genOreMap,
+                      const unsigned int &seed)
+{
+    genOreMap.resize(MAP_SIZE_Y, std::vector<OreType>(MAP_SIZE_X));
+    Perlin pn(seed);
+
+    for (int i = 0; i < MAP_SIZE_Y; i++) {
+        for (int j = 0; j < MAP_SIZE_X; j++) {
+            TerrainType terrT = m_map[i][j];
+
+            // We don't want ore in water (that would just be mean).
+            if (terrT == TERRAIN_TYPE_WATER) {
+                genOreMap[i][j] = ORE_TYPE_NONE;
+                continue;
+            }
+            
+            double x = (double) i / ((double) MAP_SIZE_X);
+            double y = (double) j / ((double) MAP_SIZE_Y);
+
+            double n = pn.Noise(x * 10.0f, y * 10.0f, 0.8f);
+
+            if (n >= 0.35f && n < 0.37f) {
+                genOreMap[i][j] = ORE_TYPE_IRON;
+            }
+            
+            else
+                genOreMap[i][j] = ORE_TYPE_NONE;
         }
     }
 }

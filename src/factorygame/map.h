@@ -18,6 +18,12 @@ enum TerrainType
     TERRAIN_TYPE_GRASS,
 };
 
+enum OreType
+{
+    ORE_TYPE_NONE,
+    ORE_TYPE_IRON
+};
+
 class Map
 {
     public:
@@ -32,14 +38,21 @@ class Map
         void Generate(std::vector<std::vector<TerrainType> > &genmap,
                       const unsigned int &seed);
 
+        void generateOre(std::vector<std::vector<OreType>> &genOreMap,
+                         const unsigned int &seed);
+
     private:
         SDL_Rect src_rect, dst_rect;
+        SDL_Rect srcRectOre, dstRectOre;
+
         SDL_Texture* tex_dirt;
         SDL_Texture* tex_grass;
         SDL_Texture* tex_water;
+        SDL_Texture* tex_test_ore;
 
         // For baseline purposes the array will be stored in a 2D array.
         std::vector<std::vector<TerrainType> > m_map;
+        std::vector<std::vector<OreType>> m_mapOre;
 
         Engine &m_engine;
 };
