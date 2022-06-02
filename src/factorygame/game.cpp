@@ -12,14 +12,14 @@ Map* map;
 
 Game::Game(const char *title, int x, int y, int width, int height,
            bool fullscreen, bool resizable) : 
-               m_engine(title, x, y, width, height, fullscreen, resizable),
-               m_title(title),
-               m_x(x),
-               m_y(y),
-               m_w(width),
-               m_h(height),
-               m_fullscreen(fullscreen),
-               m_resizable(resizable)
+           m_engine    (title, x, y, width, height, fullscreen, resizable),
+           m_title     (title),
+           m_x         (x),
+           m_y         (y),
+           m_w         (width),
+           m_h         (height),
+           m_fullscreen(fullscreen),
+           m_resizable (resizable)
 { }
 
 Game::~Game() { }
