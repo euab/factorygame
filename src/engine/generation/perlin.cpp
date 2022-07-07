@@ -6,11 +6,6 @@
 #include <iostream>
 #include <vector>
 
-//
-// ============================= BIG FAT WARNING =============================
-// This file sucks balls stay away from it unless you enjoy pain.
-//
-
 Perlin::Perlin()
 {
     // Create a perlin noise map with a default permutation vector.
